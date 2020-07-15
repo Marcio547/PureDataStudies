@@ -1,0 +1,54 @@
+#N canvas 1667 55 1853 1002 10;
+#X obj 230 129 vline~;
+#X obj 138 337 output~;
+#X obj 276 194 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 3800 1;
+#X msg 294 157 0;
+#X obj 140 287 *~;
+#X msg 329 157 1;
+#X obj 102 88 osc~;
+#X msg 79 55 440;
+#X text 431 79 vline accepts arguments separated by comma. It is possible
+to create sound envelopes., f 43;
+#X text 431 46 Using vline along with messages;
+#X text 430 125 Arguments: Attack / Decay / Sustain / Release;
+#X text 431 155 ATTACK [ramps up to] [duration], f 33;
+#X text 432 287 *starts counting immediately after message is sent.
+;
+#X text 295 214 safety mute;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array waveform 100 float 1 black black;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0;
+#X coords 0 1 99 -1 200 140 1;
+#X restore 431 324 graph;
+#X obj 255 328 tabwrite~ waveform;
+#X obj 271 294 metro 50;
+#X obj 300 249 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 224 31 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X text 62 29 frequency;
+#X text 250 29 hit to start;
+#X text 431 179 DECAY [ramps down to] [duration] [starts after*(ms)]
+, f 53;
+#X text 432 203 RELEASE [ramps down to] [duration] [starts after*(ms)]
+;
+#X text 432 230 SUSTAIN is calculed using the difference between the
+beginning of DECAY AND RELEASE times., f 33;
+#X msg 212 75 1 1000 \, 0.5 50 1000 \, 0 2000 1050;
+#X connect 0 0 4 1;
+#X connect 2 0 4 1;
+#X connect 3 0 2 0;
+#X connect 4 0 1 0;
+#X connect 4 0 1 1;
+#X connect 4 0 15 0;
+#X connect 5 0 2 0;
+#X connect 6 0 4 0;
+#X connect 7 0 6 0;
+#X connect 16 0 15 0;
+#X connect 17 0 16 0;
+#X connect 18 0 24 0;
+#X connect 24 0 0 0;
